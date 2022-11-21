@@ -59,9 +59,7 @@ function App() {
             <td><button onClick={() => getPokemonData(data)}>
               {data.name}
             </button></td>
-            <div className="Display">{!pokemonChosen ? (
-              <h1>Please Choose a Pokemon</h1>
-            ) : (
+            <div className="Display">{pokemonChosen && (
               <>
                 <h1>{pokemonData.name}</h1>
                 <img src={pokemonData.img} />
