@@ -4,15 +4,15 @@ import axios from 'axios';
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
-  const [pokemon, setPokemon] = useState([]);
-  const [pokemonChosen, setPokemonChosen] = useState(false);
+  const [pokemon, setPokemon] = useState([]); //fetches all pokemon
+  const [pokemonChosen, setPokemonChosen] = useState(false);// clicked
   const [pokemonData, setPokemonData] = useState({
     name: "",
     img: "",
     ability: "",
     experience: "",
     forms: ""
-  });
+  }); //Data for pkmn
 
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function App() {
   }
 
   let pokeMap = {};
-  const arr = pokemon.results && pokemon.results.length > 0 && pokemon.results.filter((data => {
+  const arr = pokemon?.results?.length > 0 && pokemon.results.filter((data => {
     if (searchInput === "") {
       return data;
     } else if (data.name.toLowerCase().includes(searchInput.toLowerCase())) {
@@ -59,7 +59,7 @@ function App() {
             <td><button onClick={() => getPokemonData(data)}>
               {data.name}
             </button></td>
-            <div className="Display">{pokemonChosen && (
+            <div className="Display">{pokemonChosen && pokemonData.name === data.name && (
               <>
                 <h1>{pokemonData.name}</h1>
                 <img src={pokemonData.img} />
