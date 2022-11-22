@@ -10,6 +10,7 @@ function App() {
     name: "",
     img: "",
     ability: "",
+    ability2: "",
     experience: "",
     forms: ""
   }); //Data for pkmn
@@ -30,6 +31,7 @@ function App() {
         name: res.data.name,
         img: res.data.sprites.front_default,
         ability: res.data.abilities[0].ability.name,
+        ability2: res.data.abilities[1].ability.name,
         experience: res.data.base_experience,
         forms: res.data.forms[0].name
       });
@@ -64,7 +66,7 @@ function App() {
                 <h1>{pokemonData.name}</h1>
                 <img src={pokemonData.img} />
                 <h3>Species: {pokemonData.forms}</h3>
-                <h3>ability: {pokemonData.ability}</h3>
+                <h3>ability: {pokemonData.ability}, {pokemonData.ability2}</h3>
                 <h4>Experience: {pokemonData.experience}</h4>
               </>
             )}
