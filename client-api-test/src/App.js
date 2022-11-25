@@ -10,11 +10,10 @@ function App() {
     name: "",
     img: "",
     ability: "",
-    ability2: "",
     experience: "",
+    abilityList: "",
     forms: ""
   }); //Data for pkmn
-
 
   useEffect(() => {
     axios.get("https://pokeapi.co/api/v2/pokemon")
@@ -27,13 +26,22 @@ function App() {
 
   function getPokemonData(data) {
     axios.get(data.url).then(res => {
+
+      const data = res.data;
+      const name = data.name
+      const image = data.sprites.front_default;
+      const abilityArray = data.abilities;
+      const base_experience = data.base_experience;
+      const forms = data.forms[0].name;
+
+      console.log("bussy" + JSON.stringify(image));
+
       setPokemonData({
-        name: res.data.name,
-        img: res.data.sprites.front_default,
-        ability: res.data.abilities[0].ability.name,
-        ability2: res.data.abilities[1].ability.name,
-        experience: res.data.base_experience,
-        forms: res.data.forms[0].name
+        name: name,
+        img: image,
+        abilityList: abilityArray,
+        experience: base_experience,
+        forms: forms
       });
       setIsPokemonChosen(true)
       console.log(res.data)
@@ -42,18 +50,26 @@ function App() {
     })
   }
 
-  let pokeMap = {};
+  // let pokeMap = {};
   const arr = fetchPokemon?.results?.length > 0 && fetchPokemon.results.filter((data => {
     if (searchInput === "") {
       return data;
     } else if (data.name.toLowerCase().includes(searchInput.toLowerCase())) {
       //pokeMap[data.name] = data.url;
-      pokeMap['name'] = data.name;
-      pokeMap['url'] = data.url;
+      // pokeMap['name'] = data.name;
+      // pokeMap['url'] = data.url;
       return data;
     }
     console.log("DATA :::: ", data);
   }))
+
+    // const arrayColumn = (arr, n) => arr.map(x => x[n]);
+
+    // const twoDimensionalArray = [
+    //   [1, 2, 3],
+    //   [4, 5, 6],
+    //   [7, 8, 9],
+    // ];
     .map((data, index) => {
       return (
         <div>
@@ -66,14 +82,19 @@ function App() {
                 <h1>{pokemonData.name}</h1>
                 <img src={pokemonData.img} />
                 <h3>Species: {pokemonData.forms}</h3>
-                <h3>ability: {pokemonData.ability}, {pokemonData.ability2}</h3>
+
+                <h2>Ability:</h2>
+                {pokemonData.abilityList.map(abilitiesObject =>
+                  <h3>{abilitiesObject.ability.name}</h3>
+                )}
+
                 <h4>Experience: {pokemonData.experience}</h4>
               </>
             )}
             </div>
-          </th>
+          </th >
           <td></td>
-        </div>
+        </div >
       )
     })
 
