@@ -35,7 +35,7 @@ function App() {
       const forms = data.forms[0].name;
       const moves = data.moves
 
-      console.log("bussy" + JSON.stringify(moves));
+      console.log("Testing Seeing Data :::: " + JSON.stringify(moves));
 
       setPokemonData({
         name: name,
