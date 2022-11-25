@@ -9,10 +9,10 @@ function App() {
   const [pokemonData, setPokemonData] = useState({
     name: "",
     img: "",
-    ability: "",
-    experience: "",
+    forms: "",
+    pokemonMoves: "",
     abilityList: "",
-    forms: ""
+    experience: ""
   }); //Data for pkmn
 
   useEffect(() => {
@@ -33,15 +33,17 @@ function App() {
       const abilityArray = data.abilities;
       const base_experience = data.base_experience;
       const forms = data.forms[0].name;
+      const moves = data.moves
 
-      console.log("bussy" + JSON.stringify(image));
+      console.log("bussy" + JSON.stringify(moves));
 
       setPokemonData({
         name: name,
         img: image,
+        forms: forms,
         abilityList: abilityArray,
-        experience: base_experience,
-        forms: forms
+        pokemonMoves: moves,
+        experience: base_experience
       });
       setIsPokemonChosen(true)
       console.log(res.data)
@@ -73,14 +75,19 @@ function App() {
               <>
                 <h1>{pokemonData.name}</h1>
                 <img src={pokemonData.img} />
-                <h3>Species: {pokemonData.forms}</h3>
+                <h2>Species: {pokemonData.forms}</h2>
 
                 <h2>Ability:</h2>
                 {pokemonData.abilityList.map(abilitiesObject =>
                   <h3>{abilitiesObject.ability.name}</h3>
                 )}
 
-                <h4>Experience: {pokemonData.experience}</h4>
+                <h3>Moves:</h3>
+                {pokemonData.pokemonMoves.map(movesList => {
+                  return <h4>{movesList.move.name}</h4>
+                })}
+
+                <h5>Experience: {pokemonData.experience}</h5>
               </>
             )}
             </div>
