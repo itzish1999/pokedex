@@ -115,6 +115,7 @@ function App() {
           }}
         />
         <table>
+          <button onClick={() => setIsPokemonChosen(false)}>Close</button>
           <tr>
             <th>Name</th>
           </tr>
