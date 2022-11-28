@@ -35,7 +35,7 @@ function App() {
       const forms = data.forms[0].name;
       const moves = data.moves
 
-      console.log("Testing Seeing Data :::: " + JSON.stringify(moves));
+      // console.log("Testing Seeing Data :::: " + JSON.stringify(moves));
 
       setPokemonData({
         name: name,
@@ -64,36 +64,33 @@ function App() {
     }
     console.log("DATA :::: ", data);
   }))
-    .map((data, index) => {
+    .map((data) => {
       return (
-        <div>
-          <th style={{ paddingRight: '5px' }}>
-            <td><button onClick={() => getPokemonData(data)}>
-              {data.name}
-            </button></td>
-            <div className="Display">{isPokemonChosen && pokemonData.name === data.name && (
-              <>
-                <h1>{pokemonData.name}</h1>
-                <img src={pokemonData.img} />
-                <h2>Species: {pokemonData.forms}</h2>
+        <div style={{ width: '250px', margin: '10px' }}>
+          <button onClick={() => getPokemonData(data)}>
+            {data.name}
+          </button>
+          <div>{isPokemonChosen && pokemonData.name === data.name && (
+            <>
+              <p>{pokemonData.name}</p>
+              <img src={pokemonData.img} />
 
-                <h2>Ability:</h2>
-                {pokemonData.abilityList.map(abilitiesObject =>
-                  <h3>{abilitiesObject.ability.name}</h3>
-                )}
+              <p><b>Species:</b> {pokemonData.forms}</p>
 
-                <h3>Moves:</h3>
-                {pokemonData.pokemonMoves.map(movesList => {
-                  return <h4>{movesList.move.name}</h4>
-                })}
+              <p><b>abilities:</b> {pokemonData.abilityList.map((abilitiesObject) => {
+                return <p className="Abilities">{abilitiesObject.ability.name + ", "}</p>
+              })} </p>
 
-                <h5>Experience: {pokemonData.experience}</h5>
-              </>
-            )}
-            </div>
-          </th >
-          <td></td>
-        </div >
+
+              <p><b>Moves:</b> {pokemonData.pokemonMoves.map(movesObject =>
+                <p className="Moves">{movesObject.move.name + ", "}</p>
+              )}</p>
+
+              <p>Experience: {pokemonData.experience}</p>
+            </>
+          )}
+          </div>
+        </div>
       )
     })
 
@@ -114,13 +111,10 @@ function App() {
             setSearchInput(e.target.value)
           }}
         />
-        <table>
-          <button onClick={() => setIsPokemonChosen(false)}>Close</button>
-          <tr>
-            <th>Name</th>
-          </tr>
-        </table>
-        {arr}
+        <button onClick={() => setIsPokemonChosen(false)}>Close</button>
+        <div className={'pokemonName'}>
+          {arr}
+        </div>
       </form>
     </div>
   );
