@@ -4,8 +4,8 @@ import axios from 'axios';
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
-  const [fetchPokemon, setFetchPokemon] = useState([]); //fetches all pokemon
-  const [isPokemonChosen, setIsPokemonChosen] = useState(false);// clicked
+  const [fetchPokemon, setFetchPokemon] = useState([]);
+  const [isPokemonChosen, setIsPokemonChosen] = useState(false);
   const [pokemonData, setPokemonData] = useState({
     name: "",
     img: "",
@@ -13,12 +13,12 @@ function App() {
     pokemonMoves: "",
     abilityList: "",
     experience: ""
-  }); //Data for pkmn
+  });
 
   useEffect(() => {
     axios.get("https://pokeapi.co/api/v2/pokemon")
       .then(res => {
-        // console.log("Getting from Server ::::", res.data)
+        console.log("Getting from Server ::::", res.data)
         setFetchPokemon(res.data)
         console.log("DATA :::: ", res.data)
       }).catch(err => console.log(err))
@@ -35,7 +35,7 @@ function App() {
       const forms = data.forms[0].name;
       const moves = data.moves
 
-      // console.log("Testing Seeing Data :::: " + JSON.stringify(moves));
+      console.log("Testing Seeing Data :::: " + JSON.stringify(moves));
 
       setPokemonData({
         name: name,
@@ -52,14 +52,10 @@ function App() {
     })
   }
 
-  // let pokeMap = {};
   const arr = fetchPokemon?.results?.length > 0 && fetchPokemon.results.filter((data => {
     if (searchInput === "") {
       return data;
     } else if (data.name.toLowerCase().includes(searchInput.toLowerCase())) {
-      //pokeMap[data.name] = data.url;
-      // pokeMap['name'] = data.name;
-      // pokeMap['url'] = data.url;
       return data;
     }
     console.log("DATA :::: ", data);
@@ -97,8 +93,6 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
   }
-  // console.log("The KEYS are ::::", Object.keys(arr));
-  // console.log("The VALUES are ::::", Object.values(arr));
 
   return (
     <div className="App">
