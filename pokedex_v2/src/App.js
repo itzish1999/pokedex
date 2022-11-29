@@ -7,6 +7,7 @@ import './App.css';
 
 function App() {
   const [pokemonURL, setPokemonURL] = useState([]);
+  const [pokemonDetails, setPokemonDetails] = useState({});
 
   const fetchPokemonNames = async () => {
     await axios.get("https://pokeapi.co/api/v2/pokemon")
@@ -18,18 +19,25 @@ function App() {
 
   useEffect(() => {
     fetchPokemonNames();
+    test();
   }, []);
 
   console.log("IS THE STATE UPDATED:::: ", pokemonURL)
-  // we have 20 URLs we need to be able to go into each one. How can we do that?
+  // We have 20 URLs we need to be able to go into each one. How can we do that?
 
 
-
-  // if (pokemonURL && pokemonURL.length > 0) {
-  //   axios.get(data.url)
-
-  // }
-
+  /* If statement is just a check. See if the data is returned then .map over the data, 
+  axios into the url and then return data */
+  function test() {
+    if (pokemonURL && pokemonURL.length > 0) {
+      pokemonURL.map(data => {
+        axios.get(data.url).then(res => {
+          setPokemonDetails(res.data)
+        })
+      })
+    }
+  }
+  console.log("Pokemon Data :::: ", pokemonDetails)
 
   return (
     <div className="App">
