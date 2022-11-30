@@ -14,6 +14,15 @@ function App() {
       return (
         axios.get(data.url).then(res => {
           console.log("Mapped into url to present pokemon details", res.data)
+
+          const data = res.data;
+          const name = data.name;
+          const image = data.sprites.front_default;
+          const forms = data.forms[0].name;
+          const abilityArray = data.abilities;
+          const moves = data.moves;
+          // console.log("Testing Seeing Data :::: " + JSON.stringify(moves)); // Test if data loads properly
+
           setPokemonDetails(res.data)
         }))
     })

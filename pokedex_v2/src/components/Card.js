@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Card = ({ pokemonImage, pokemonName, pokemonAbilities, pokemonMoves, pokemonExperience }) => {
+const Card = ({ pokemonImage, pokemonName, pokemonForms, pokemonAbilities, pokemonMoves, pokemonExperience }) => {
     return (
         <div className="card">
             <div className="card-top">
@@ -9,6 +9,7 @@ const Card = ({ pokemonImage, pokemonName, pokemonAbilities, pokemonMoves, pokem
                 <img src={pokemonImage} />
             </div>
             <div className="card-body">
+                <p>Forms: {pokemonForms}</p>
                 <p>Abilities: {pokemonAbilities} </p>
                 <p>Moves: {pokemonMoves}</p>
             </div>
