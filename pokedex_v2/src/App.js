@@ -6,38 +6,46 @@ import './App.css';
 
 
 function App() {
-  const [pokemonURL, setPokemonURL] = useState([]);
+  const [pokemonURLS, setPokemonURLS] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState({});
 
-  const fetchPokemonNames = async () => {
-    await axios.get("https://pokeapi.co/api/v2/pokemon")
+  function fetchPokemonDetails() {
+    pokemonURLS.map(data => {
+      axios.get(data.url).then(res => {
+        console.log("Mapped into url to present pokemon details", res.data)
+        setPokemonDetails(res.data)
+      })
+    })
+  }
+
+  function fetchPokemon() {
+    axios.get("https://pokeapi.co/api/v2/pokemon")
       .then(res => {
-        setPokemonURL(res.data.results);
-      }).catch(err => console.log(err))
+        console.log("Get pokemon names and urls", res.data)
+        setPokemonURLS(res.data.results, () => { console.log("hbh") })
+      })
+      .catch(err => console.log(err))
   };
 
+  useEffect(() => {
+    if (!pokemonURLS.length > 0) {
+      fetchPokemon()
+    }
+  });
 
   useEffect(() => {
-    fetchPokemonNames();
-    test();
-  }, []);
+    if (pokemonURLS.length > 0) {
+      fetchPokemonDetails();
+    }
+  }, [pokemonURLS]);
 
-  console.log("IS THE STATE UPDATED:::: ", pokemonURL)
+  // console.log("IS THE STATE UPDATED:::: ", pokemonURL)
   // We have 20 URLs we need to be able to go into each one. How can we do that?
 
 
   /* If statement is just a check. See if the data is returned then .map over the data, 
   axios into the url and then return data */
-  function test() {
-    if (pokemonURL && pokemonURL.length > 0) {
-      pokemonURL.map(data => {
-        axios.get(data.url).then(res => {
-          setPokemonDetails(res.data)
-        })
-      })
-    }
-  }
-  console.log("Pokemon Data :::: ", pokemonDetails)
+
 
   return (
     <div className="App">
@@ -45,6 +53,7 @@ function App() {
         <Heading />
       </div>
       <div className="body">
+
         <Card
           pokemonName="Bulbasaur" // Testing to see if card works
         />
