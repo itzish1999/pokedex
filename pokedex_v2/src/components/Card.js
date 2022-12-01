@@ -9,7 +9,7 @@ const Card = ({ pokemonImage, pokemonName, pokemonForms, pokemonAbilities, pokem
                 <img src={pokemonImage} />
             </div>
             <div className="card-body">
-                <p>Forms: {pokemonForms}</p>
+                <p>Species: {pokemonForms}</p>
                 <p>Abilities: {pokemonAbilities} </p>
                 <p>Moves: {pokemonMoves}</p>
             </div>

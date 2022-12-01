@@ -6,3 +6,20 @@
   height: 100px;
   width: 100px;
 }
+
+.card {
+  display: inline-block;
+  border-radius: 25px;
+  border: 2px solid black;
+  width: 500px;
+  margin: auto;
+  padding-bottom: ;
+}
+
+.card-top {
+  background-color: rgb(127, 236, 255);
+}
+
+.card-bottom {
+  background-color: rgb(127, 236, 255);
+}

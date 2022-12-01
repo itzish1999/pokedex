@@ -1,37 +1,38 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
 import Card from "./components/Card";
-import Heading from "./components/Heading";
+import Logo from "./components/Logo";
 import './App.css';
 
 
 function App() {
   const [pokemonURLS, setPokemonURLS] = useState([]);
-  const [pokemonDetails, setPokemonDetails] = useState({});
+  const [pokemonDetails, setPokemonDetails] = useState([]);
 
   function fetchPokemonDetails() {
     pokemonURLS.map(data => {
       return (
         axios.get(data.url).then(res => {
-          console.log("Mapped into url to present pokemon details", res.data)
+          const { name, sprites: { front_default }, forms, abilities, moves, base_experience } = res.data;
 
-          const data = res.data;
-          const name = data.name;
-          const image = data.sprites.front_default;
-          const forms = data.forms[0].name;
-          const abilityArray = data.abilities;
-          const moves = data.moves;
-          // console.log("Testing Seeing Data :::: " + JSON.stringify(moves)); // Test if data loads properly
-
-          setPokemonDetails(res.data)
-        }))
+          const test = {
+            name,
+            image: front_default,
+            form: forms[0].name,
+            abilities,
+            moves,
+            experience: base_experience
+          }
+          setPokemonDetails(prevState => ([...prevState, { ...test }]))
+        })).catch(err => {
+          console.log(err)
+        })
     })
   }
 
   function fetchPokemon() {
     axios.get("https://pokeapi.co/api/v2/pokemon")
       .then(res => {
-        console.log("Get pokemon names and urls", res.data.results)
         setPokemonURLS(res.data.results, () => { })
       })
       .catch(err => console.log(err))
@@ -52,13 +53,22 @@ function App() {
   return (
     <div className="App">
       <div className="heading">
-        <Heading />
+        <Logo />
       </div>
       <div className="body">
-
-        <Card
-          pokemonName="Bulbasaur" // Testing to see if card works
-        />
+        {pokemonDetails.map(pokedex => {
+          return (
+            <Card
+              pokemonName={pokedex.name}
+              pokemonImage={pokedex.image}
+              pokemonForms={pokedex.form}
+              pokemonAbilities={pokedex.abilities.map(abilityList => abilityList.ability.name).join(', ')}
+              pokemonMoves={pokedex.moves.map(moveList => moveList.move.name).join(', ')}
+              pokemonExperience={pokedex.experience}
+            />
+          )
+        })
+        }
       </div>
     </div>
   );
