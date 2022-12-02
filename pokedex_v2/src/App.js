@@ -56,19 +56,21 @@ function App() {
         <Logo />
       </div>
       <div className="body">
-        {pokemonDetails.map(pokedex => {
-          return (
-            <Card
-              pokemonName={pokedex.name}
-              pokemonImage={pokedex.image}
-              pokemonForms={pokedex.form}
-              pokemonAbilities={pokedex.abilities.map(abilityList => abilityList.ability.name).join(', ')}
-              pokemonMoves={pokedex.moves.map(moveList => moveList.move.name).join(', ')}
-              pokemonExperience={pokedex.experience}
-            />
-          )
-        })
-        }
+        <div className="cardContainer">
+          {pokemonDetails.map(pokedex => {
+            return (
+              <Card
+                pokemonName={pokedex.name}
+                pokemonImage={pokedex.image}
+                pokemonForms={pokedex.form}
+                pokemonAbilities={pokedex.abilities.map(abilityList => abilityList.ability.name).join(', ')}
+                pokemonMoves={pokedex.moves.map(moveList => moveList.move.name).join(', ')}
+                pokemonExperience={pokedex.experience}
+              />
+            )
+          })
+          }
+        </div>
       </div>
     </div>
   );

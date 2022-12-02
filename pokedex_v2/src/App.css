@@ -7,13 +7,18 @@
   width: 100px;
 }
 
+/* .cardContainer {
+  align-content: center;
+} */
+
 .card {
+  flex-wrap: wrap;
   display: inline-block;
   border-radius: 25px;
   border: 2px solid black;
-  width: 500px;
-  margin: auto;
-  padding-bottom: ;
+  width: 390px;
+  margin: 10px;
+  /* align-content: flex-end; */
 }
 
 .card-top {
