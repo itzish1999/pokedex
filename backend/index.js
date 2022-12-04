@@ -1,3 +1,5 @@
+import router from "./Routes/routes"
+
 const express = require('express');
 
 const app = express();
