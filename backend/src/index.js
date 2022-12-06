@@ -11,24 +11,16 @@ const getAllPokemon = async () => {
                 'Accept-Encoding': 'application/json',
             }
         };
-        const { data: response } = await axios.get(
-            'https://pokeapi.co/api/v2/pokemon', headers
-        );
-        console.log(response);
+        const { data: response } = await axios.get('https://pokeapi.co/api/v2/pokemon', headers);
         return response.results;
     } catch (err) {
-        // Handle Error Here
         console.error(err);
     }
 };
 
 app.get('/pokemon/getAll', async (req, res) => {
     const pokemon = await getAllPokemon();
-    if (pokemon.length > 0) {
-        res.send(pokemon);
-    } else {
-        res.send("No Pokemon Found");
-    }
+    pokemon.length > 0 ? res.send(pokemon) : res.send("No Pokemon Found")
 });
 
 app.get('/', (req, res) => {
