@@ -1,6 +1,5 @@
 const express = require('express');
 const axios = require('axios');
-const { response } = require('express');
 
 const app = express();
 
