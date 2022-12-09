@@ -72,4 +72,5 @@ app.get('/', (req, res) => {
     console.log(res)
 })
 
-app.listen(8080, () => console.log('Node server is running on PORT 8080'));
+const { PORT } = require('../config');
+app.listen(PORT, () => console.log(`Node server is running on PORT ${PORT}`));
