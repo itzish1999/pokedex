@@ -5,7 +5,6 @@ const Card = ({ pokemonImage, pokemonName, pokemonForms, pokemonAbilities, pokem
     const [isClicked, setIsCliked] = useState(false);
 
     const handleClick = value => () => {
-        console.log(value);
         setIsCliked(true)
     }
 
@@ -17,12 +16,12 @@ const Card = ({ pokemonImage, pokemonName, pokemonForms, pokemonAbilities, pokem
             </div>
             <div className="card-body">
                 <p><b>Species:</b> {pokemonForms}</p>
-                <p><b>Abilities:</b> {pokemonAbilities} </p>
+                <p><b>Abilities:</b> {pokemonAbilities.map(abilityList => abilityList.ability.name).join(', ')} </p>
                 <button onClick={handleClick(pokemonMoves)}><b>See Moves:</b></button>
                 <button onClick={() => setIsCliked(false)}><b>Close Moves</b></button>
                 <div>{isClicked && (
                     <>
-                        <p><b>Moves:</b> {pokemonMoves}</p>
+                        <p><b>Moves:</b> {pokemonMoves.map(movesList => movesList.move.name).join(', ')}</p>
                     </>
                 )}
                 </div>

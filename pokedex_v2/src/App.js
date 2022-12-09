@@ -6,49 +6,27 @@ import './App.css';
 
 
 function App() {
-  const [pokemonURLS, setPokemonURLS] = useState([]);
   const [pokemonDetails, setPokemonDetails] = useState([]);
 
-  function fetchPokemonDetails() {
-    pokemonURLS.map(data => {
-      return (
-        axios.get(data.url).then(res => {
-          const { name, sprites: { front_default }, forms, abilities, moves, base_experience } = res.data;
-
-          const test = {
-            name,
-            image: front_default,
-            form: forms[0].name,
-            abilities,
-            moves,
-            experience: base_experience
-          }
-          setPokemonDetails(prevState => ([...prevState, { ...test }]))
-        })).catch(err => {
-          console.log(err)
-        })
-    })
-  }
-
   function fetchPokemon() {
-    axios.get("https://pokeapi.co/api/v2/pokemon")
+    axios.get("http://localhost:8080/pokemon/getAll")
       .then(res => {
-        setPokemonURLS(res.data.results, () => { })
+        setPokemonDetails(res.data)
       })
       .catch(err => console.log(err))
   };
 
   useEffect(() => {
-    if (!pokemonURLS.length > 0) {
+    if (!pokemonDetails.length > 0) {
       fetchPokemon()
     }
   });
 
-  useEffect(() => {
-    if (pokemonURLS.length > 0) {
-      fetchPokemonDetails();
+  useEffect(() => { // remove I believe
+    if (pokemonDetails.length > 0) {
+      fetchPokemon();
     }
-  }, [pokemonURLS]);
+  }, []);
 
   return (
     <div className="App">
@@ -63,8 +41,8 @@ function App() {
                 pokemonName={pokedex.name}
                 pokemonImage={pokedex.image}
                 pokemonForms={pokedex.form}
-                pokemonAbilities={pokedex.abilities.map(abilityList => abilityList.ability.name).join(', ')}
-                pokemonMoves={pokedex.moves.map(moveList => moveList.move.name).join(', ')}
+                pokemonAbilities={pokedex.abilities} // Move to backend
+                pokemonMoves={pokedex.moves} // Move to Backend
                 pokemonExperience={pokedex.experience}
               />
             )
