@@ -3,6 +3,13 @@ const axios = require('axios');
 
 const app = express();
 
+app.use((_req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+
+    next();
+});
+
 const getAllPokemon = async () => {
     try {
         const headers = {
@@ -11,14 +18,12 @@ const getAllPokemon = async () => {
             }
         };
         const { data: response } = await axios.get('https://pokeapi.co/api/v2/pokemon', headers);
-        // console.log("Here are the results ::: ", response.results);
         return response.results;
     } catch (err) {
         console.error(err);
     }
 };
 
-// Find a way to go through the array that is returned via map and axios get into the urls
 async function getAllPokemonDetails(pokemon) {
     const headers = {
         headers: {
@@ -26,21 +31,27 @@ async function getAllPokemonDetails(pokemon) {
         }
     };
     const transformedPokemonArray = pokemon.map(async pokemonDetail => {
-        return await axios.get(pokemonDetail.url, headers).then(res => { //works fine
+        return await axios.get(pokemonDetail.url, headers).then(res => {
 
             const { name, sprites: { front_default }, forms, abilities, moves, base_experience } = res.data;
-            // This works properly as well
 
-            const test = { // Test Works just like how i wanted it to.
+            // name , sprintes, forms, abilities, moves, base_experience
+
+            //create table with above 6 columns
+            // create an insert sql statement as a sample
+            // fetch that sample inserted with a select * from tableName where name = sampleName
+            // learn how to alter table to add more columns or change primary key, what is primary key?
+
+
+            const test = {
                 name,
                 image: front_default,
                 form: forms[0].name,
                 abilities,
                 moves,
                 experience: base_experience
-            }
-            pokemonDetail = res.data // pokemonDetail deeeeeefinately works.
-            // console.log("PokemonDetails ::: ", pokemonDetail)
+            };
+            pokemonDetail = test;
             return pokemonDetail;
         }).catch(err => {
             console.log(err);
