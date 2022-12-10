@@ -1,0 +1,42 @@
+pokemonTable {
+    name: "bulbasaur",
+    image: "image.url.link.com",
+    form: "bulbasaur",
+    abilities: [
+        "overgrow",
+        " chlorophyll"
+    ],
+    moves: [
+        " razor-wind"
+    ],
+    experience: 64
+}
+
+insert into pokemon(name, image, form, abilities, moves, experience)
+values()
+
+alter the table to remove abilities,
+
+create new table called abilities, and index to correlate with pokemon table using name as primary key and connect abilities to pokemon which contain said key
+
+pokemonTable {
+    name: string,
+    profilePic: "image.url.link.com",
+    form: "bulbasaur",
+    abilities: [
+        "overgrow",
+        " chlorophyll"
+    ],
+    moves: [
+        " razor-wind"
+    ],
+    experience: bigserial
+}
+
+alter table statements
+
+
+
+write a javscript script 
+which calls pokimon api & creates insert statement which we save to some file
+

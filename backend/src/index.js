@@ -35,7 +35,7 @@ async function getAllPokemonDetails(pokemon) {
 
             const { name, sprites: { front_default }, forms, abilities, moves, base_experience } = res.data;
 
-            // name , sprintes, forms, abilities, moves, base_experience
+            // name , sprites, forms, abilities, moves, base_experience
 
             //create table with above 6 columns
             // create an insert sql statement as a sample
