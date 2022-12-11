@@ -13,7 +13,7 @@ const client = new pg.Client({
 await client.connect();
 
 try {
-    const result = await pd.getPokemonList({
+    const result = await pd.getPokemonsList({
         limit: 20,
     });
     const arrPokemon = result.results;
