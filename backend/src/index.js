@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const { PORT, URL } = require('../config');
 
 const app = express();
 
@@ -17,7 +18,7 @@ const getAllPokemon = async () => {
                 'Accept-Encoding': 'application/json',
             }
         };
-        const { data: response } = await axios.get('https://pokeapi.co/api/v2/pokemon', headers);
+        const { data: response } = await axios.get(URL, headers);
         return response.results;
     } catch (err) {
         console.error(err);
@@ -72,5 +73,4 @@ app.get('/', (req, res) => {
     console.log(res)
 })
 
-const { PORT } = require('../config');
 app.listen(PORT, () => console.log(`Node server is running on PORT ${PORT}`));
