@@ -24,8 +24,8 @@ try {
             const p = await pd.getPokemonByName(r.name)
 
             const query = {
-                text: "INSERT INTO pokemon (name, form, image, experience) VALUES ($1, $2, $3, $4)",
-                values: [p.name, p.forms.name, p.sprites.front_default, p.base_experience],
+                text: "INSERT INTO pokemon (name, form, abilities, moves, image, experience) VALUES ($1, $2, $3, $4, $5, $6)",
+                values: [p.name, JSON.stringify(p.forms), JSON.stringify(p.abilities), JSON.stringify(p.moves), p.sprites.front_default, p.base_experience],
             };
             await client.query(query);
 
