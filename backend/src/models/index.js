@@ -12,16 +12,16 @@ module.exports = {
         })
     },
 
-    getPokemonFromNameQuery: (req, res) => {
-        try {
-            const name = req.params.name;
-            db_client.query(`SELECT name FROM pokemon WHERE name = ${name}`, (err, result) => {
-                if (!err) {
-                    res.send(result.rows);
-                }
-            })
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // getPokemonFromNameQuery: (req, res) => {
+    //     try {
+    //         const name = req.params.name;
+    //         db_client.query(`SELECT name FROM pokemon WHERE name = ${name}`, (err, result) => {
+    //             if (!err) {
+    //                 res.send(result.rows);
+    //             }
+    //         })
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // }
 }
