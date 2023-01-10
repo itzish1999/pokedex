@@ -22,7 +22,7 @@ function App() {
     }
   });
 
-  useEffect(() => { // remove I believe
+  useEffect(() => {
     if (pokemonDetails.length > 0) {
       fetchPokemon();
     }

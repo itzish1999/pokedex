@@ -15,7 +15,7 @@ const Card = ({ pokemonImage, pokemonName, pokemonForms, pokemonAbilities, pokem
                 <img src={pokemonImage} />
             </div>
             <div className="card-body">
-                <p><b>Species:</b> {pokemonForms}</p>
+                <p><b>Species:</b> {pokemonForms.map(form => form.name)}</p>
                 <p><b>Abilities:</b> {pokemonAbilities.map(abilityList => abilityList.ability.name).join(', ')} </p>
                 <button onClick={handleClick(pokemonMoves)}><b>See Moves:</b></button>
                 <button onClick={() => setIsCliked(false)}><b>Close Moves</b></button>
